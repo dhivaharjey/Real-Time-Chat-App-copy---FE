@@ -18,6 +18,7 @@ import {
   Tooltip,
   useDisclosure,
   useToast,
+  Badge,
 } from "@chakra-ui/react";
 import React, { memo, Suspense, useState } from "react";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
@@ -31,7 +32,7 @@ import UserListItem from "../UsersList/UserListItem";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallBack from "../ErrorFallBack";
 import { getSender } from "../../Config/ChatLogics";
-import NotificationBadge, { Effect } from "react-notification-badge";
+// import NotificationBadge, { Effect } from "react-notification-badge";
 const HeaderAndSideDrawer = () => {
   console.log("HeaderAndSideDrawer");
 
@@ -42,7 +43,6 @@ const HeaderAndSideDrawer = () => {
   const [loadingChat, setLoadingChat] = useState(false);
 
   const {
-    api,
     user,
     setSelectedChat,
     chats,
@@ -177,11 +177,21 @@ const HeaderAndSideDrawer = () => {
         <div>
           <Menu>
             <MenuButton padding={1}>
-              <NotificationBadge
-                count={notification?.length}
-                effect={Effect.SCALE}
-              />
-              <BellIcon fontSize="2xl" m={1} />
+              <BellIcon fontSize="2xl" mr={2}></BellIcon>
+              {notification?.length > 0 ? (
+                <Badge
+                  paddingInline="6px"
+                  position="absolute"
+                  right="80px"
+                  top="3px"
+                  borderRadius="50%"
+                  color="whiteAlpha.900"
+                  bgColor="red.500"
+                >
+                  {notification?.length}
+                </Badge>
+              ) : null}
+              {/* </BellIcon> */}
             </MenuButton>
             <MenuList pl={2}>
               {!notification?.length && "No New Messages"}

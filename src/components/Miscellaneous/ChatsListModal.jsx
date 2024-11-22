@@ -1,7 +1,7 @@
-import { Avatar, Box, Text } from "@chakra-ui/react";
+import { Avatar, Box, Text, Badge } from "@chakra-ui/react";
 import React, { memo } from "react";
 import { ChatState } from "../Context/ChatProvider";
-import NotificationBadge, { Effect } from "react-notification-badge";
+
 const ChatsListModal = ({ user, notify }) => {
   console.log("chatlistmodal");
 
@@ -35,7 +35,19 @@ const ChatsListModal = ({ user, notify }) => {
           ) : null}
         </Box> */}
         <Box position="absolute" right="1px" top="10px" px={1}>
-          <NotificationBadge count={notify?.length} effect={Effect.SCALE} />
+          {notify?.length > 0 ? (
+            <Badge
+              paddingInline="6px"
+              position="absolute"
+              right="1px"
+              top="0px"
+              borderRadius="full"
+              color="whiteAlpha.900"
+              bgColor="red.500"
+            >
+              {notify?.length}
+            </Badge>
+          ) : null}
         </Box>
       </Box>
     </>
